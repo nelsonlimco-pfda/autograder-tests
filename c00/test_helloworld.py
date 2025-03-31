@@ -20,6 +20,6 @@ def test_correct_output(monkeypatch):
     with monkeypatch.context() as mock_context:
         mock_context.setattr(sys, "stdout", mocked_stdout)
         sys.modules.pop(MODULE_NAME, None)
-        importlib.import_module(name=MODULE_NAME)
+        importlib.import_module(name=f"src.{MODULE_NAME}")
     expected_result = ("Hello World!\n")
     assert_equal (expected_result, mocked_stdout.getvalue())
