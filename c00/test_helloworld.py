@@ -1,7 +1,6 @@
 import importlib
 import sys
 import io
-import pytest
 
 from check_pfda.utils import assert_script_exists, build_user_friendly_err
 
