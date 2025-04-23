@@ -5,7 +5,7 @@ import io
 from check_pfda.utils import assert_script_exists, build_user_friendly_err
 
 
-MODULE_NAME = "helloworld"
+MODULE_NAME = "hello_world"
 ACCEPTED_DIRS = ["src"]
 
 
