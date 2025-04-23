@@ -3,8 +3,7 @@ import sys
 import io
 import pytest
 
-
-from utils.util_autograder import assert_equal, assert_script_exists
+from check_pfda.utils.test_helpers import assert_equal, assert_script_exists
 
 
 MODULE_NAME = "helloworld"
