@@ -3,7 +3,7 @@ import sys
 import io
 import pytest
 
-from check_pfda.utils.test_helpers import assert_equal, assert_script_exists
+from check_pfda.utils.test_helpers import assert_script_exists, build_user_friendly_err
 
 
 MODULE_NAME = "helloworld"
@@ -21,4 +21,4 @@ def test_correct_output(monkeypatch):
         sys.modules.pop(MODULE_NAME, None)
         importlib.import_module(name=MODULE_NAME)
     expected_result = ("Hello World!\n")
-    assert_equal (expected_result, mocked_stdout.getvalue())
+    assert mocked_stdout.getvalue() == expected_result, (build_user_friendly_err(mocked_stdout.getvalue(), expected_result))
