@@ -2,10 +2,11 @@ import importlib
 import sys
 import io
 
-from check_pfda.utils import assert_script_exists, build_user_friendly_err
+from check_pfda.utils import (assert_script_exists, build_user_friendly_err,
+                              get_module_in_src)
 
 
-MODULE_NAME = "hello_world"
+MODULE_NAME = get_module_in_src()
 ACCEPTED_DIRS = ["src"]
 
 
