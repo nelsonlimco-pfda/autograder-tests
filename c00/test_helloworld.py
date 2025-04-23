@@ -3,7 +3,7 @@ import sys
 import io
 import pytest
 
-from check_pfda.utils.test_helpers import assert_script_exists, build_user_friendly_err
+from check_pfda.utils import assert_script_exists, build_user_friendly_err
 
 
 MODULE_NAME = "helloworld"
