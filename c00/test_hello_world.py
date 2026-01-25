@@ -4,15 +4,14 @@ import io
 import os
 from pathlib import Path
 
-from check_pfda.utils import (assert_script_exists, build_user_friendly_err,
-                              get_module_in_src)
+from check_pfda.utils import (assert_script_exists, build_user_friendly_err)
 
 
 cwd_src = os.path.join(os.getcwd(), "src")
 if cwd_src not in sys.path:
     sys.path.insert(0, cwd_src)
 
-MODULE_NAME = get_module_in_src()
+MODULE_NAME = "helloworld"
 
 ACCEPTED_DIRS = ["src"]
 
@@ -32,4 +31,5 @@ def test_correct_output(monkeypatch):
             if cwd_src in sys.path:
                 sys.path.remove(cwd_src)
     expected_result = ("Hello World!\n")
-    assert mocked_stdout.getvalue() == expected_result, (build_user_friendly_err(mocked_stdout.getvalue(), expected_result))
+    assert mocked_stdout.getvalue() == expected_result, (build_user_friendly_err(
+        mocked_stdout.getvalue(), expected_result))

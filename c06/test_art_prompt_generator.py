@@ -6,10 +6,9 @@ import sys
 
 import pytest
 
-from check_pfda.utils import (assert_script_exists, build_user_friendly_err,
-                              get_module_in_src)
+from check_pfda.utils import (assert_script_exists, build_user_friendly_err)
 
-MODULE_NAME = get_module_in_src()
+MODULE_NAME = "art_prompts"
 ACCEPTED_DIRS = ["src"]
 
 nouns_list = ["Percentage", "Storage", "Reflection", "Physics", "Village"]
@@ -27,6 +26,7 @@ def tmp_noun_list(tmpdir):
         inventory_file.write(file_contents)
     return filename
 
+
 @pytest.fixture
 def tmp_adj_list(tmpdir):
     """Generates a temporary .txt file in a temporary directory for testing."""
@@ -43,17 +43,18 @@ def test_script_exists():
 
 def test_get_prompts_from_file_returns_list_of_words(tmp_noun_list):
     # GIVEN a text file with known contents and a list of known results
-    # WHEN get_prompts_from_file is called 
+    # WHEN get_prompts_from_file is called
     # THEN we can compare the output of get_prompts_from_file using the text file with known contents and the list of known results
     sys.modules.pop(MODULE_NAME, None)
     mod = importlib.import_module(name=MODULE_NAME)
-    
+
     result_get_prompts_from_file = mod.get_prompts_from_file(tmp_noun_list)
-    
+
     for word in range(0, len(nouns_list)):
-        assert result_get_prompts_from_file[word] == nouns_list[word], ("get_prompts_from_file did not read the text file correctly.")
-    
-    
+        assert result_get_prompts_from_file[word] == nouns_list[word], (
+            "get_prompts_from_file did not read the text file correctly.")
+
+
 def test_pick_random_prompt_generates_random_prompt():
     # GIVEN that pick_random_prompt() is random
     # WHEN pick_random_prompt() is called 10 times
@@ -66,11 +67,14 @@ def test_pick_random_prompt_generates_random_prompt():
     curr_dir = os.getcwd()
     subfolder = "src"
     filename_nouns = os.path.join(curr_dir, subfolder, nouns_filename)
-    filename_adjectives = os.path.join(curr_dir, subfolder, adjectives_filename)
+    filename_adjectives = os.path.join(
+        curr_dir, subfolder, adjectives_filename)
     prompt_nouns = mod.get_prompts_from_file(filename_nouns)
     prompt_adjectives = mod.get_prompts_from_file(filename_adjectives)
-    first_five_combinations = [f"{mod.pick_random_prompt(prompt_nouns)} {mod.pick_random_prompt(prompt_adjectives)}" for n in range(5)]
-    next_five_combinations = [f"{mod.pick_random_prompt(prompt_nouns)} {mod.pick_random_prompt(prompt_adjectives)}" for n in range(5)]
+    first_five_combinations = [
+        f"{mod.pick_random_prompt(prompt_nouns)} {mod.pick_random_prompt(prompt_adjectives)}" for n in range(5)]
+    next_five_combinations = [
+        f"{mod.pick_random_prompt(prompt_nouns)} {mod.pick_random_prompt(prompt_adjectives)}" for n in range(5)]
     if first_five_combinations == next_five_combinations:
         assert False, f"Function repeats itself. {first_five_combinations}:{next_five_combinations}"
         return
@@ -80,15 +84,17 @@ def test_pick_random_prompt_generates_random_prompt():
         original_state = mod.random.getstate()
     except AttributeError as err:
         assert False, random_not_found_msg
-    initial_result = [] 
+    initial_result = []
     for n in range(10):
         mod.random.seed(n)
-        initial_result.append(f"{mod.pick_random_prompt(prompt_nouns)} {mod.pick_random_prompt(prompt_adjectives)}")    
+        initial_result.append(
+            f"{mod.pick_random_prompt(prompt_nouns)} {mod.pick_random_prompt(prompt_adjectives)}")
     # reseed random to get the same result
-    repeat_result = [] 
+    repeat_result = []
     for n in range(10):
         mod.random.seed(n)
-        repeat_result.append(f"{mod.pick_random_prompt(prompt_nouns)} {mod.pick_random_prompt(prompt_adjectives)}")
+        repeat_result.append(
+            f"{mod.pick_random_prompt(prompt_nouns)} {mod.pick_random_prompt(prompt_adjectives)}")
     # restore the random generator state just before we exit the test.
     mod.random.setstate(original_state)
     if initial_result != repeat_result:

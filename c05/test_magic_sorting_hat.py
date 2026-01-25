@@ -5,9 +5,9 @@ import sys
 
 
 from check_pfda.utils import (assert_script_exists,
-                              get_module_in_src)
+                              build_user_friendly_err)
 
-MODULE_NAME = get_module_in_src()
+MODULE_NAME = "magic_sorting_hat"
 ACCEPTED_DIRS = ["src"]
 
 
@@ -35,12 +35,12 @@ def test_sort_to_house_uses_random():
         original_state = mod.random.getstate()
     except AttributeError as err:
         assert False, random_not_found_msg
-    initial_result = [] 
+    initial_result = []
     for n in range(10):
         mod.random.seed(n)
-        initial_result.append(mod.sort_to_house())    
+        initial_result.append(mod.sort_to_house())
     # reseed random to get the same result
-    repeat_result = [] 
+    repeat_result = []
     for n in range(10):
         mod.random.seed(n)
         repeat_result.append(mod.sort_to_house())

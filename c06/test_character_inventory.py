@@ -8,10 +8,9 @@ import csv
 import pytest
 
 
-from check_pfda.utils import (assert_script_exists, build_user_friendly_err,
-                              get_module_in_src)
+from check_pfda.utils import (assert_script_exists, build_user_friendly_err)
 
-MODULE_NAME = get_module_in_src()
+MODULE_NAME = "inventory"
 ACCEPTED_DIRS = ["src"]
 
 
@@ -65,5 +64,5 @@ def test_add_item_creates_new_line(monkeypatch, tmp_inventory_csv):
             file_output += (f"{row[0]},{row[1]}\n")
 
     expected = "Crossbow,50\nSword,20\nIron Helmet,25\nShield,15\n"
-    assert file_output == expected, build_user_friendly_err(file_output, expected)
-    
+    assert file_output == expected, build_user_friendly_err(
+        file_output, expected)

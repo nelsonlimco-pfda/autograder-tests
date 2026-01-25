@@ -3,11 +3,10 @@ import io
 import importlib
 import os
 import sys
-from check_pfda.utils import (assert_script_exists, build_user_friendly_err,
-                              get_module_in_src)
+from check_pfda.utils import (assert_script_exists, build_user_friendly_err)
 
 
-MODULE_NAME = get_module_in_src()
+MODULE_NAME = "rps"
 ACCEPTED_DIRS = ["src"]
 
 
@@ -67,7 +66,6 @@ def test_play_round_ties():
         actual = mod.play_round(param.p1_pick, param.p2_pick)
         expected = param.expected_output
         assert actual == expected, build_user_friendly_err(actual, expected)
-        
 
 
 def test_format_round_results_player_wins():
@@ -111,8 +109,8 @@ def test_main_3_rounds_tie(monkeypatch):
                              "scissors",
                              "paper",
                              "scissors"],
-                             "Round 1:\nPlayer 1 Wins!\n\nRound 2:\nTie.\n\nRound "
-                             "3:\nPlayer 2 Wins!\n\nThis game is a tie.\n")]
+                            "Round 1:\nPlayer 1 Wins!\n\nRound 2:\nTie.\n\nRound "
+                            "3:\nPlayer 2 Wins!\n\nThis game is a tie.\n")]
     # TODO: refactor this into a function in autograder utils to simplify the way
     # standard io tests are written.
     for param in parameters:
@@ -123,14 +121,15 @@ def test_main_3_rounds_tie(monkeypatch):
         # on exit to avoid breaking pytest itself
         with monkeypatch.context() as m:
             # patches the input() and pops the first test input in params
-            m.setattr('builtins.input', lambda prompt='': param.test_inputs.pop(0))
+            m.setattr('builtins.input',
+                      lambda prompt='': param.test_inputs.pop(0))
             m.setattr('sys.stdout', patch_stdout)
             sys.modules.pop(MODULE_NAME, None)
             mod = importlib.import_module(name=MODULE_NAME)
             mod.main()
         actual = patch_stdout.getvalue()
         expected = param.expected_output
-        assert actual == expected, build_user_friendly_err(actual, expected) 
+        assert actual == expected, build_user_friendly_err(actual, expected)
 
 
 def test_main_3_rounds_win(monkeypatch):
@@ -155,11 +154,12 @@ def test_main_3_rounds_win(monkeypatch):
         # on exit to avoid breaking pytest itself
         with monkeypatch.context() as m:
             # patches the input() and pops the first test input in params
-            m.setattr('builtins.input', lambda prompt='': param.test_inputs.pop(0))
+            m.setattr('builtins.input',
+                      lambda prompt='': param.test_inputs.pop(0))
             m.setattr('sys.stdout', patch_stdout)
             sys.modules.pop(MODULE_NAME, None)
             mod = importlib.import_module(name=MODULE_NAME)
             mod.main()
         actual = patch_stdout.getvalue()
         expected = param.expected_output
-        assert actual == expected, build_user_friendly_err(actual, expected) 
+        assert actual == expected, build_user_friendly_err(actual, expected)

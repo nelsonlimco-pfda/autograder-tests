@@ -2,10 +2,9 @@ import importlib
 import os
 import sys
 
-from check_pfda.utils import (assert_script_exists, build_user_friendly_err,
-                              get_module_in_src)
+from check_pfda.utils import (assert_script_exists, build_user_friendly_err)
 
-MODULE_NAME = get_module_in_src()
+MODULE_NAME = "pattern_quilt_generator"
 ACCEPTED_DIRS = ["src"]
 
 
@@ -22,7 +21,8 @@ def test_odd_quilt():
                        "🔴🔵🔴\n"
                        "🔵🔴🔵\n")
     actual = mod.create_checkered_quilt_pattern("🔵", "🔴", 3, 5)
-    assert actual == expected_output, build_user_friendly_err(actual, expected_output)
+    assert actual == expected_output, build_user_friendly_err(
+        actual, expected_output)
 
 
 def test_even_quilt():
@@ -33,7 +33,8 @@ def test_even_quilt():
                        "🔵🔴🔵🔴\n"
                        "🔴🔵🔴🔵\n")
     actual = mod.create_checkered_quilt_pattern("🔵", "🔴", 4, 4)
-    assert actual == expected_output, build_user_friendly_err(actual, expected_output)
+    assert actual == expected_output, build_user_friendly_err(
+        actual, expected_output)
 
 
 def test_zero_width_height():
@@ -41,15 +42,17 @@ def test_zero_width_height():
     mod = importlib.import_module(name=MODULE_NAME)
     expected_output = ""
     actual = mod.create_checkered_quilt_pattern("🔵", "🔴", 0, 0)
-    assert actual == expected_output, build_user_friendly_err(actual, expected_output)
-    
+    assert actual == expected_output, build_user_friendly_err(
+        actual, expected_output)
+
 
 def test_single_tile():
     sys.modules.pop(MODULE_NAME, None)
     mod = importlib.import_module(name=MODULE_NAME)
     expected_output = "🔵\n"
     actual = mod.create_checkered_quilt_pattern("🔵", "🔴", 1, 1)
-    assert actual == expected_output, build_user_friendly_err(actual, expected_output)
+    assert actual == expected_output, build_user_friendly_err(
+        actual, expected_output)
 
 
 def test_single_row():
@@ -57,7 +60,8 @@ def test_single_row():
     mod = importlib.import_module(name=MODULE_NAME)
     expected_output = "🔵🔴🔵🔴🔵🔴\n"
     actual = mod.create_checkered_quilt_pattern("🔵", "🔴", 6, 1)
-    assert actual == expected_output, build_user_friendly_err(actual, expected_output)
+    assert actual == expected_output, build_user_friendly_err(
+        actual, expected_output)
 
 
 def test_single_column():
@@ -70,7 +74,8 @@ def test_single_column():
                        "🔵\n"
                        "🔴\n")
     actual = mod.create_checkered_quilt_pattern("🔵", "🔴", 1, 6)
-    assert actual == expected_output, build_user_friendly_err(actual, expected_output)
+    assert actual == expected_output, build_user_friendly_err(
+        actual, expected_output)
 
 
 def test_no_emojis_given_as_args():
@@ -78,7 +83,8 @@ def test_no_emojis_given_as_args():
     mod = importlib.import_module(name=MODULE_NAME)
     expected_output = ""
     actual = mod.create_checkered_quilt_pattern("", "", 8, 8)
-    assert actual == expected_output, build_user_friendly_err(actual, expected_output)
+    assert actual == expected_output, build_user_friendly_err(
+        actual, expected_output)
 
 
 def test_one_emoji_given_as_arg():
@@ -88,4 +94,5 @@ def test_one_emoji_given_as_arg():
                        "🔵🔵🔵🔵🔵\n"
                        "🔵🔵🔵🔵🔵\n")
     actual = mod.create_checkered_quilt_pattern("🔵", "", 10, 3)
-    assert actual == expected_output, build_user_friendly_err(actual, expected_output)
+    assert actual == expected_output, build_user_friendly_err(
+        actual, expected_output)
