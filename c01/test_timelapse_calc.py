@@ -6,13 +6,13 @@ import sys
 
 import pytest
 
-
+from check_pfda.core import REPO_PATH
 MODULE_NAME = "timelapse_calc"
 ACCEPTED_DIRS = ["src"]
 
 
 def test_script_exists():
-    assert_script_exists(MODULE_NAME, ACCEPTED_DIRS)
+    assert_script_exists(MODULE_NAME, ACCEPTED_DIRS, REPO_PATH)
 
 
 def test_integer_input(monkeypatch):

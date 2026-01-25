@@ -3,14 +3,14 @@ import importlib
 import sys
 
 from check_pfda.utils import (assert_script_exists, build_user_friendly_err)
-
+from check_pfda.core import REPO_PATH
 
 MODULE_NAME = "favorite_artist"
 ACCEPTED_DIRS = ["src"]
 
 
 def test_script_exists():
-    assert_script_exists(MODULE_NAME, ACCEPTED_DIRS)
+    assert_script_exists(MODULE_NAME, ACCEPTED_DIRS, REPO_PATH)
 
 
 def test_string_input(monkeypatch):

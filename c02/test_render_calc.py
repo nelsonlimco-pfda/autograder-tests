@@ -7,13 +7,13 @@ import sys
 from check_pfda.utils import (assert_script_exists, build_user_friendly_err)
 import pytest
 
-
+from check_pfda.core import REPO_PATH
 MODULE_NAME = "render_calc"
 ACCEPTED_DIRS = ["src"]
 
 
 def test_script_exists():
-    assert_script_exists(MODULE_NAME, ACCEPTED_DIRS)
+    assert_script_exists(MODULE_NAME, ACCEPTED_DIRS, REPO_PATH)
 
 
 def test_input_output(monkeypatch):

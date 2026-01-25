@@ -7,7 +7,7 @@ import sys
 import pytest
 
 from check_pfda.utils import (assert_script_exists, build_user_friendly_err)
-
+from check_pfda.core import REPO_PATH
 MODULE_NAME = "art_prompts"
 ACCEPTED_DIRS = ["src"]
 
@@ -38,7 +38,7 @@ def tmp_adj_list(tmpdir):
 
 
 def test_script_exists():
-    assert_script_exists(MODULE_NAME, ACCEPTED_DIRS)
+    assert_script_exists(MODULE_NAME, ACCEPTED_DIRS, REPO_PATH)
 
 
 def test_get_prompts_from_file_returns_list_of_words(tmp_noun_list):
