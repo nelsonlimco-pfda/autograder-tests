@@ -103,7 +103,7 @@ def test_main_3_rounds_tie(monkeypatch):
     )
     parameters = [Parameter(["rock", "rock", "paper", "paper", "scissors", "scissors"],
                             "Round 1:\nTie!\n\nRound 2:\nTie!\n\nRound 3:\nTie!\n\n"
-                            "This game is a Tie!\n"),
+                            "This game is a tie!\n"),
                   Parameter(["rock",
                              "scissors",
                              "scissors",
@@ -111,7 +111,7 @@ def test_main_3_rounds_tie(monkeypatch):
                              "paper",
                              "scissors"],
                             "Round 1:\nPlayer 1 Wins!\n\nRound 2:\nTie!\n\nRound "
-                            "3:\nPlayer 2 Wins!\n\nThis game is a Tie!\n")]
+                            "3:\nPlayer 2 Wins!\n\nThis game is a tie!\n")]
     # TODO: refactor this into a function in autograder utils to simplify the way
     # standard io tests are written.
     for param in parameters:
