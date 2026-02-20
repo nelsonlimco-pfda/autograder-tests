@@ -81,7 +81,7 @@ def test_format_round_results_player_wins():
     )
     parameters = [Parameter(1, "Player 1 Wins!"),
                   Parameter(2, "Player 2 Wins!"),
-                  Parameter(0, "Tie.")]
+                  Parameter(0, "Tie!")]
     sys.modules.pop(MODULE_NAME, None)
     mod = importlib.import_module(name=MODULE_NAME)
     for param in parameters:
@@ -102,16 +102,16 @@ def test_main_3_rounds_tie(monkeypatch):
         ["test_inputs", "expected_output"]
     )
     parameters = [Parameter(["rock", "rock", "paper", "paper", "scissors", "scissors"],
-                            "Round 1:\nTie.\n\nRound 2:\nTie.\n\nRound 3:\nTie.\n\n"
-                            "This game is a tie.\n"),
+                            "Round 1:\nTie!\n\nRound 2:\nTie!\n\nRound 3:\nTie!\n\n"
+                            "This game is a Tie!\n"),
                   Parameter(["rock",
                              "scissors",
                              "scissors",
                              "scissors",
                              "paper",
                              "scissors"],
-                            "Round 1:\nPlayer 1 Wins!\n\nRound 2:\nTie.\n\nRound "
-                            "3:\nPlayer 2 Wins!\n\nThis game is a tie.\n")]
+                            "Round 1:\nPlayer 1 Wins!\n\nRound 2:\nTie!\n\nRound "
+                            "3:\nPlayer 2 Wins!\n\nThis game is a Tie!\n")]
     # TODO: refactor this into a function in autograder utils to simplify the way
     # standard io tests are written.
     for param in parameters:
@@ -143,7 +143,7 @@ def test_main_3_rounds_win(monkeypatch):
                             "Round 3:\nPlayer 2 Wins!\n\nPlayer 1 wins the game!\n"),
                   Parameter(["rock", "scissors", "paper", "rock", "rock", "rock"],
                             "Round 1:\nPlayer 1 Wins!\n\nRound 2:\nPlayer 1 Wins!\n\n"
-                            "Round 3:\nTie.\n\nPlayer 1 wins the game!\n"),
+                            "Round 3:\nTie!\n\nPlayer 1 wins the game!\n"),
                   Parameter(["scissors", "rock", "paper", "scissors", "rock", "paper"],
                             "Round 1:\nPlayer 2 Wins!\n\nRound 2:\nPlayer 2 Wins!\n\n"
                             "Round 3:\nPlayer 2 Wins!\n\nPlayer 2 wins the game!\n")]
